@@ -51,15 +51,15 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 0 52px;
     display: flex; justify-content: space-between; align-items: center;
-    height: 80px;
-    background: rgba(5,5,5,0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--line);
+    height: 88px;
+    background: transparent;
     transition: all 0.4s;
   }
 
   nav.scrolled {
-    background: rgba(5,5,5,0.98);
+    background: rgba(5,5,5,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
   }
 
   .nav-logo img {
@@ -101,6 +101,7 @@
     height: 100vh; min-height: 640px;
     position: relative; overflow: hidden;
     display: flex; align-items: flex-end;
+    margin-top: 0;
   }
 
   .hero-slides { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
@@ -574,23 +575,50 @@
 
   /* MOBILE */
   @media (max-width: 900px) {
-    nav { padding: 0 24px; }
+    nav { padding: 0 20px; height: 70px; }
     .nav-links { display: none; }
-    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0; background: rgba(5,5,5,0.98); padding: 24px; border-bottom: 1px solid var(--line); gap: 4px; }
+    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: rgba(5,5,5,0.98); padding: 24px; border-bottom: 1px solid var(--line); gap: 4px; }
     .hamburger { display: flex; }
-    .hero-content { padding: 0 24px 60px; }
-    .hero-dots { right: 24px; }
-    .wrap { padding: 0 24px; }
+
+    /* Hero – geen zwarte balk, vol scherm */
+    .hero { height: 100svh; min-height: 600px; }
+    .hero-content { padding: 0 20px 56px; }
+    .hero-dots { right: 20px; bottom: 56px; }
+    .hero-title { font-size: clamp(52px, 14vw, 80px); }
+
+    .wrap { padding: 0 20px; }
+
+    /* Studio */
     .studio-grid { grid-template-columns: 1fr; }
-    .artist-block { grid-template-columns: 1fr; }
+    .studio-img { min-height: 280px; }
+    .studio-img img { object-fit: contain; background: #050505; }
+
+    /* Artists – foto volledig zichtbaar */
+    .artist-block { grid-template-columns: 1fr; min-height: auto; }
     .artist-block.reverse { direction: ltr; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .artist-photos { min-height: 360px; }
+    .artist-main-photo { min-height: 360px; object-fit: cover; object-position: top; }
+    .artist-photo-placeholder { min-height: 360px; }
+    .artist-info { padding: 40px 24px; }
+
+    /* Gallery */
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px 200px;
+      padding: 0 20px !important;
+    }
     .gallery-item:first-child { grid-row: auto; }
+    .gallery-item img { object-fit: cover; }
+
+    /* Specs */
     .specs-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Booking */
     .booking-inner { grid-template-columns: 1fr; }
-    .booking-left, .booking-right { padding: 56px 28px; }
+    .booking-left, .booking-right { padding: 48px 20px; }
     .form-row { grid-template-columns: 1fr; }
-    footer { padding: 36px 24px; }
+
+    footer { padding: 36px 20px; }
     .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
 </style>
@@ -600,7 +628,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="IMG_0454.png" alt="Pink Blue Tattoo" style="height:56px;width:auto;display:block;">
+    <img src="logo.png" alt="Pink Blue Tattoo" style="height:68px;width:auto;display:block;">
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#studio" onclick="closeNav()">Studio</a></li>
@@ -698,9 +726,6 @@
   <div class="artist-block">
     <div class="artist-photos">
       <img class="artist-main-photo" src="IMG_0459.png" alt="Tom">
-      <div class="artist-badge">
-        <div class="artist-badge-placeholder">Tom</div>
-      </div>
     </div>
     <div class="artist-info reveal">
       <span class="artist-number">01</span>
@@ -856,7 +881,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="#"><img src="IMG_0454.png" alt="Pink Blue Tattoo" style="height:32px;width:auto;display:block;"></a>
+    <a href="#"><img src="logo.png" alt="Pink Blue Tattoo" style="height:32px;width:auto;display:block;"></a>
     <div class="footer-address">Bundesstr. 8, 8753 Fohnsdorf · Murtal, Steiermark</div>
     <div class="footer-links">
       <a href="#">Impressum</a>
