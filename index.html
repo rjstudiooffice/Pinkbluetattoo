@@ -51,7 +51,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 0 52px;
     display: flex; justify-content: space-between; align-items: center;
-    height: 88px;
+    height: 108px;
     background: transparent;
     transition: all 0.4s;
   }
@@ -100,7 +100,7 @@
   .hero {
     height: 100vh; min-height: 640px;
     position: relative; overflow: hidden;
-    display: flex; align-items: flex-end;
+    display: flex; align-items: center;
     margin-top: 0;
   }
 
@@ -134,7 +134,7 @@
 
   .hero-content {
     position: relative; z-index: 4;
-    padding: 0 52px 72px; max-width: 900px;
+    padding: 0 52px; max-width: 900px;
   }
 
   .hero-label {
@@ -575,49 +575,67 @@
 
   /* MOBILE */
   @media (max-width: 900px) {
-    nav { padding: 0 20px; height: 70px; }
+    /* NAV */
+    nav { padding: 0 20px; height: 76px; }
+    .nav-logo img { height: 56px !important; }
     .nav-links { display: none; }
-    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: rgba(5,5,5,0.98); padding: 24px; border-bottom: 1px solid var(--line); gap: 4px; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 76px; left: 0; right: 0;
+      background: rgba(5,5,5,0.98); padding: 24px;
+      border-bottom: 1px solid var(--line); gap: 4px;
+    }
     .hamburger { display: flex; }
 
-    /* Hero – geen zwarte balk, vol scherm */
-    .hero { height: 100svh; min-height: 600px; }
-    .hero-content { padding: 0 20px 56px; }
-    .hero-dots { right: 20px; bottom: 56px; }
-    .hero-title { font-size: clamp(52px, 14vw, 80px); }
+    /* HERO */
+    .hero { height: 100svh; min-height: 580px; align-items: center; }
+    .hero-content { padding: 76px 20px 40px; }
+    .hero-title { font-size: clamp(48px, 13vw, 72px); line-height: 0.9; }
+    .hero-sub { font-size: 14px; margin-bottom: 24px; }
+    .hero-actions { margin-bottom: 24px; }
+    .hero-facts { gap: 16px; }
+    .hero-fact { font-size: 10px; }
+    .hero-dots { right: 20px; bottom: 32px; }
 
+    /* STUDIO */
     .wrap { padding: 0 20px; }
-
-    /* Studio */
     .studio-grid { grid-template-columns: 1fr; }
-    .studio-img { min-height: 280px; }
-    .studio-img img { object-fit: contain; background: #050505; }
+    .studio-img { min-height: 260px; }
+    .studio-img img { object-fit: contain; background: #050505; width: 100%; height: 100%; }
+    .studio-content { padding: 40px 24px; }
 
-    /* Artists – foto volledig zichtbaar */
+    /* ARTISTS */
     .artist-block { grid-template-columns: 1fr; min-height: auto; }
     .artist-block.reverse { direction: ltr; }
-    .artist-photos { min-height: 360px; }
-    .artist-main-photo { min-height: 360px; object-fit: cover; object-position: top; }
-    .artist-photo-placeholder { min-height: 360px; }
-    .artist-info { padding: 40px 24px; }
+    .artist-photos { min-height: 400px; }
+    .artist-main-photo { width: 100%; min-height: 400px; object-fit: cover; object-position: top center; }
+    .artist-info { padding: 40px 20px; }
+    .artist-number { font-size: 80px; }
+    .artist-name { font-size: clamp(48px, 12vw, 72px); }
 
-    /* Gallery */
+    /* GALLERY */
     .gallery-grid {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 200px 200px 200px;
+      grid-template-rows: 180px 180px 180px;
       padding: 0 20px !important;
+      margin-top: 40px !important;
     }
     .gallery-item:first-child { grid-row: auto; }
-    .gallery-item img { object-fit: cover; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Specs */
+    /* SPECS */
     .specs-grid { grid-template-columns: 1fr 1fr; }
+    .spec-block { padding: 32px 20px; }
+    .spec-num { font-size: 48px; }
 
-    /* Booking */
+    /* BOOKING */
     .booking-inner { grid-template-columns: 1fr; }
-    .booking-left, .booking-right { padding: 48px 20px; }
+    .booking-left { padding: 48px 20px; }
+    .booking-right { padding: 40px 20px; }
+    .booking-title { font-size: clamp(36px, 9vw, 56px); }
     .form-row { grid-template-columns: 1fr; }
 
+    /* FOOTER */
     footer { padding: 36px 20px; }
     .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
@@ -628,7 +646,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="logo.png" alt="Pink Blue Tattoo" style="height:68px;width:auto;display:block;">
+    <img src="logo.png" alt="Pink Blue Tattoo" style="height:100px;width:auto;display:block;">
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#studio" onclick="closeNav()">Studio</a></li>
@@ -749,9 +767,6 @@
   <div class="artist-block reverse">
     <div class="artist-photos">
       <img class="artist-main-photo" src="IMG_0461.jpeg" alt="Fiona">
-      <div class="artist-badge">
-        <div class="artist-badge-placeholder">Fiona</div>
-      </div>
     </div>
     <div class="artist-info reveal">
       <span class="artist-number">02</span>
