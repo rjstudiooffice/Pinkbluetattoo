@@ -51,15 +51,15 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 0 52px;
     display: flex; justify-content: space-between; align-items: center;
-    height: 72px;
-    border-bottom: 1px solid transparent;
+    height: 80px;
+    background: rgba(5,5,5,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
     transition: all 0.4s;
   }
 
   nav.scrolled {
-    background: rgba(5,5,5,0.95);
-    backdrop-filter: blur(20px);
-    border-bottom-color: var(--line);
+    background: rgba(5,5,5,0.98);
   }
 
   .nav-logo img {
@@ -600,7 +600,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="IMG_0454.png" alt="Pink Blue Tattoo" style="height:40px;width:auto;display:block;">
+    <img src="IMG_0454.png" alt="Pink Blue Tattoo" style="height:56px;width:auto;display:block;">
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#studio" onclick="closeNav()">Studio</a></li>
@@ -753,13 +753,13 @@
   </div>
   <div class="gallery-grid reveal d2" style="margin-top:64px;padding:0 52px;">
     <div class="gallery-item">
-      <img src="IMG_0455.png" alt="Portfolio">
+      <img src="IMG_0462.png" alt="Portfolio">
     </div>
     <div class="gallery-item">
       <img src="IMG_0463.png" alt="Portfolio">
     </div>
     <div class="gallery-item">
-      <img src="IMG_0462.png" alt="Portfolio">
+      <img src="IMG_0455.png" alt="Portfolio">
     </div>
     <div class="gallery-item">
       <img src="IMG_0460.png" alt="Portfolio">
