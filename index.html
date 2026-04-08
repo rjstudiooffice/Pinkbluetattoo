@@ -7,733 +7,699 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#040404;
-      --panel:#0b0b0d;
-      --panel-2:#101014;
-      --line:rgba(255,255,255,0.08);
-      --white:#f5f7fb;
-      --text:#bfc4d0;
-      --pink:#ff2fa8;
-      --blue:#27d8ff;
-      --grad:linear-gradient(90deg,var(--pink),var(--blue));
-      --radius:26px;
-      --shadow:0 18px 60px rgba(0,0,0,.45);
-      --max:1180px;
+    :root {
+      --bg: #040404;
+      --bg-soft: #0a0a0a;
+      --panel: #101010;
+      --line: rgba(255,255,255,0.08);
+      --white: #f5f7fb;
+      --text: #b9bec8;
+      --pink: #ff2fa8;
+      --blue: #27d8ff;
+      --grad: linear-gradient(90deg, var(--pink), var(--blue));
+      --max: 1220px;
+      --radius: 28px;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Inter',sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 200;
+      background: rgba(4,4,4,0.45);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: var(--grad);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-gradient {
+      background: var(--grad);
+      color: #050505;
+      box-shadow: 0 12px 28px rgba(39,216,255,0.14), 0 10px 26px rgba(255,47,168,0.14);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.08);
+      color: var(--white);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 140px 0 80px;
+      overflow: hidden;
+    }
+
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.03);
+      animation: heroSlider 18s infinite;
+    }
+
+    .hero-slide:nth-child(1) { animation-delay: 0s; }
+    .hero-slide:nth-child(2) { animation-delay: 6s; }
+    .hero-slide:nth-child(3) { animation-delay: 12s; }
+
+    @keyframes heroSlider {
+      0% { opacity: 0; }
+      6% { opacity: 1; }
+      28% { opacity: 1; }
+      34% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
       background:
-        radial-gradient(circle at 12% 8%, rgba(255,47,168,.14), transparent 22%),
-        radial-gradient(circle at 88% 12%, rgba(39,216,255,.13), transparent 22%),
-        linear-gradient(180deg,#050505 0%, #030303 100%);
-      color:var(--white);
-      overflow-x:hidden;
-    }
-
-    a{text-decoration:none;color:inherit}
-    img{display:block;max-width:100%}
-    .container{width:min(var(--max),calc(100% - 32px));margin:0 auto}
-
-    .blur-orb{
-      position:absolute;
-      border-radius:999px;
-      filter:blur(70px);
-      opacity:.18;
-      pointer-events:none;
-      z-index:0;
-    }
-
-    .orb-pink{background:var(--pink)}
-    .orb-blue{background:var(--blue)}
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:100;
-      background:rgba(4,4,4,.78);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(255,255,255,.05);
-    }
-
-    .nav{
-      min-height:78px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:700;
-      letter-spacing:.06em;
-      font-size:14px;
-    }
-
-    .brand-mark{
-      width:40px;
-      height:40px;
-      border-radius:14px;
-      background:var(--grad);
-      color:#000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:13px;
-      font-weight:800;
-      box-shadow:0 10px 24px rgba(255,47,168,.18);
-      flex-shrink:0;
-    }
-
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .nav-links a{
-      color:var(--text);
-      font-size:14px;
-      padding:10px 14px;
-      border-radius:999px;
-      transition:.2s ease;
-    }
-
-    .nav-links a:hover{
-      color:var(--white);
-      background:rgba(255,255,255,.04);
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:50px;
-      padding:0 22px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:700;
-      transition:.22s ease;
-      border:1px solid transparent;
-      cursor:pointer;
-    }
-
-    .btn:hover{transform:translateY(-2px)}
-    .btn-gradient{
-      background:var(--grad);
-      color:#050505;
-      box-shadow:0 12px 28px rgba(39,216,255,.15),0 10px 22px rgba(255,47,168,.16);
-    }
-
-    .btn-dark{
-      color:var(--white);
-      background:rgba(255,255,255,.04);
-      border-color:rgba(255,255,255,.08);
-    }
-
-    section{padding:86px 0;position:relative}
-
-    .hero{
-      padding:38px 0 64px;
-      overflow:hidden;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.02fr .98fr;
-      gap:24px;
-      align-items:stretch;
-      position:relative;
-      z-index:1;
-    }
-
-    .hero-left,
-    .hero-right,
-    .glass-card,
-    .artist-card,
-    .feature-card,
-    .cta-box{
-      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-left{
-      padding:36px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      min-height:620px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      width:fit-content;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:var(--text);
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      margin-bottom:18px;
-    }
-
-    .eyebrow::before{
-      content:"";
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--grad);
-      box-shadow:0 0 18px rgba(39,216,255,.6);
-    }
-
-    .hero h1{
-      font-size:clamp(42px,7vw,84px);
-      line-height:.92;
-      letter-spacing:-.06em;
-      font-weight:800;
-      margin-bottom:18px;
-      max-width:10ch;
-    }
-
-    .hero h1 .grad{
-      background:var(--grad);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-sub{
-      font-size:clamp(17px,2vw,20px);
-      color:var(--text);
-      max-width:58ch;
-      line-height:1.75;
-      margin-bottom:26px;
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:28px;
-    }
-
-    .hero-mini{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
-
-    .mini-box{
-      padding:16px;
-      border-radius:18px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-    }
-
-    .mini-box strong{
-      display:block;
-      font-size:15px;
-      margin-bottom:6px;
-    }
-
-    .mini-box span{
-      color:var(--text);
-      font-size:13px;
-      line-height:1.6;
-    }
-
-    .hero-right{
-      padding:18px;
-      min-height:620px;
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .slider{
-      position:relative;
-      flex:1;
-      min-height:420px;
-      border-radius:24px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      background:#080808;
-    }
-
-    .slide{
-      position:absolute;
-      inset:0;
-      opacity:0;
-      animation:sliderFade 18s infinite;
-      background-size:cover;
-      background-position:center;
-      transform:scale(1.03);
-    }
-
-    .slide:nth-child(1){animation-delay:0s}
-    .slide:nth-child(2){animation-delay:6s}
-    .slide:nth-child(3){animation-delay:12s}
-
-    .slide::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.64) 100%);
-    }
-
-    @keyframes sliderFade{
-      0%{opacity:0}
-      6%{opacity:1}
-      28%{opacity:1}
-      34%{opacity:0}
-      100%{opacity:0}
-    }
-
-    .slider-badge{
-      position:absolute;
-      left:18px;
-      top:18px;
-      z-index:2;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(8,8,8,.56);
-      border:1px solid rgba(255,255,255,.10);
-      backdrop-filter:blur(10px);
-      color:#fff;
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .slider-text{
-      position:absolute;
-      left:18px;
-      right:18px;
-      bottom:18px;
-      z-index:2;
-      padding:18px;
-      border-radius:20px;
-      background:rgba(8,8,8,.56);
-      border:1px solid rgba(255,255,255,.09);
-      backdrop-filter:blur(12px);
-    }
-
-    .slider-text h3{
-      font-size:22px;
-      margin-bottom:8px;
-      font-weight:700;
-    }
-
-    .slider-text p{
-      color:#d5d7de;
-      font-size:14px;
-      line-height:1.65;
-    }
-
-    .logo-box{
-      padding:18px;
-      border-radius:22px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .logo-placeholder{
-      width:100%;
-      aspect-ratio:16/4.8;
-      border-radius:18px;
-      border:1px dashed rgba(255,255,255,.15);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#8d94a3;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:13px;
-      background:#070707;
-    }
-
-    .section-top{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:22px;
-      margin-bottom:24px;
-    }
-
-    .section-top h2{
-      font-size:clamp(30px,4.4vw,54px);
-      line-height:.95;
-      letter-spacing:-.05em;
-      font-weight:800;
-      margin:0;
-    }
-
-    .section-top h2 .grad{
-      background:var(--grad);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .section-top p{
-      max-width:600px;
-      color:var(--text);
-      line-height:1.75;
-      font-size:16px;
-    }
-
-    .studio-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:22px;
-    }
-
-    .glass-card{
-      padding:28px;
-    }
-
-    .glass-card h3{
-      font-size:28px;
-      margin-bottom:12px;
-      font-weight:800;
-      line-height:1;
-    }
-
-    .glass-card .grad{
-      background:var(--grad);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .glass-card p{
-      color:var(--text);
-      font-size:15px;
-      line-height:1.75;
-      margin-bottom:16px;
-    }
-
-    .list{
-      list-style:none;
-      display:grid;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .list li{
-      color:var(--text);
-      padding-left:20px;
-      position:relative;
-      line-height:1.65;
-    }
-
-    .list li::before{
-      content:"";
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--grad);
-      position:absolute;
-      left:0;
-      top:9px;
-    }
-
-    .placeholder{
-      width:100%;
-      border-radius:22px;
-      border:1px dashed rgba(255,255,255,.15);
-      background:#070707;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#8d94a3;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:13px;
-      text-align:center;
-      padding:18px;
-    }
-
-    .placeholder.studio{aspect-ratio:16/10}
-    .placeholder.artist-main{aspect-ratio:5/6}
-    .placeholder.artist-small{aspect-ratio:1/1}
-    .placeholder.gallery{aspect-ratio:16/9}
-
-    .feature-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-top:12px;
+        linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.48) 42%, rgba(0,0,0,0.86) 100%),
+        linear-gradient(90deg, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.20) 42%, rgba(0,0,0,0.58) 100%);
     }
 
-    .feature-card{
-      padding:24px;
-    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: #e5e8ef;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--grad);
+      box-shadow: 0 0 18px rgba(39,216,255,0.5);
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+      margin-bottom: 20px;
+      max-width: 11ch;
+    }
+
+    .grad {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 20px);
+      color: #d3d8e2;
+      max-width: 58ch;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+      color: #d3d8e2;
+      font-size: 14px;
+    }
+
+    .hero-stats span {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .hero-stats span::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--grad);
+      position: absolute;
+      left: 0;
+      top: 8px;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(34px, 4.6vw, 62px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+    }
+
+    .section-head p {
+      max-width: 560px;
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .image-block {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      min-height: 620px;
+    }
+
+    .image-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8b92a2;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px dashed rgba(255,255,255,0.14);
+      border-radius: var(--radius);
+      background: #080808;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .content-block h3 {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .content-block p {
+      color: var(--text);
+      line-height: 1.9;
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .bullet-list li {
+      color: var(--text);
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--grad);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .artists {
+      display: grid;
+      gap: 90px;
+    }
+
+    .artist-row {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 28px;
+      align-items: center;
+    }
 
-    .feature-card h4{
-      font-size:20px;
-      margin-bottom:10px;
-      font-weight:700;
-    }
-
-    .feature-card p{
-      color:var(--text);
-      font-size:15px;
-      line-height:1.75;
+    .artist-row.reverse {
+      grid-template-columns: 1.08fr 0.92fr;
     }
 
-    .artists-wrap{
-      display:grid;
-      gap:24px;
+    .artist-row.reverse .artist-text {
+      order: 2;
     }
 
-    .artist-card{
-      padding:28px;
-      display:grid;
-      grid-template-columns:.95fr 1.05fr;
-      gap:24px;
-      align-items:center;
+    .artist-row.reverse .artist-gallery {
+      order: 1;
     }
-
-    .artist-card.reverse{
-      grid-template-columns:1.05fr .95fr;
+
+    .artist-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .artist-gallery .large {
+      grid-column: span 2;
+      min-height: 420px;
+    }
+
+    .gallery-box {
+      border-radius: 24px;
+      overflow: hidden;
+      background: #080808;
+      border: 1px solid var(--line);
+      min-height: 220px;
+    }
+
+    .gallery-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-box.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8b92a2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      border: 1px dashed rgba(255,255,255,0.14);
+      padding: 18px;
+      text-align: center;
+    }
+
+    .artist-text .label {
+      display: inline-block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #dbe0e9;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    .artist-text h3 {
+      font-size: clamp(34px, 4.6vw, 60px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .artist-text p {
+      color: var(--text);
+      line-height: 1.9;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--grad);
+      color: #050505;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .wide-image {
+      width: 100%;
+      min-height: 620px;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #080808;
+    }
+
+    .wide-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
+      object-fit: cover;
+    }
+
+    .wide-image.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8b92a2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+      border: 1px dashed rgba(255,255,255,0.14);
+    }
+
+    .text-centered {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .artist-card.reverse .artist-info{order:2}
-    .artist-card.reverse .artist-media{order:1}
+    .text-centered h2 {
+      font-size: clamp(36px, 4.8vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .text-centered p {
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.95;
+      margin-bottom: 18px;
+    }
+
+    .text-centered p:last-child {
+      margin-bottom: 0;
+    }
+
+    .masonry {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+      gap: 18px;
+    }
+
+    .masonry-item {
+      border-radius: 26px;
+      overflow: hidden;
+      background: #080808;
+      border: 1px solid var(--line);
+      min-height: 500px;
+    }
 
-    .artist-name{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:18px;
+    .masonry-item.small {
+      min-height: 240px;
     }
 
-    .artist-name h3{
-      font-size:clamp(30px,4vw,52px);
-      line-height:1;
-      letter-spacing:-.05em;
-      font-weight:800;
+    .masonry-item.tall {
+      min-height: 500px;
     }
 
-    .pill{
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:var(--text);
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      white-space:nowrap;
+    .masonry-col {
+      display: grid;
+      gap: 18px;
     }
 
-    .artist-info p{
-      color:var(--text);
-      line-height:1.8;
-      margin-bottom:16px;
-      font-size:15px;
+    .masonry-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
+    .masonry-item.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8b92a2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      text-align: center;
+      padding: 18px;
+      border: 1px dashed rgba(255,255,255,0.14);
     }
 
-    .tag{
-      padding:10px 14px;
-      border-radius:999px;
-      background:var(--grad);
-      color:#050505;
-      font-size:13px;
-      font-weight:700;
+    .cta-box {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 38px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
     }
 
-    .artist-media-grid{
-      display:grid;
-      grid-template-columns:1fr 1.2fr;
-      grid-template-rows:170px 170px;
-      gap:14px;
+    .cta-box h2 {
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      margin-bottom: 12px;
     }
 
-    .artist-media-grid .big{
-      grid-row:1 / span 2;
+    .cta-box p {
+      color: var(--text);
+      max-width: 760px;
+      line-height: 1.85;
+      font-size: 16px;
     }
 
-    .center-box{
-      max-width:860px;
-      margin:0 auto;
-      text-align:center;
-      padding:32px;
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
-    .center-box p{
-      color:var(--text);
-      line-height:1.9;
-      font-size:16px;
-      margin-bottom:18px;
+    footer {
+      padding: 28px 0 48px;
+      color: #8b92a2;
+      font-size: 14px;
     }
 
-    .center-box p:last-child{margin-bottom:0}
-
-    .gallery-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr .9fr;
-      gap:18px;
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 22px;
     }
 
-    .gallery-panel{
-      padding:24px;
-      border-radius:24px;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
-      box-shadow:var(--shadow);
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .gallery-panel h4{
-      font-size:21px;
-      font-weight:800;
-    }
-
-    .gallery-panel p{
-      color:var(--text);
-      font-size:15px;
-      line-height:1.75;
-    }
-
-    .cta-box{
-      padding:34px;
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:18px;
-      align-items:center;
-      overflow:hidden;
-      position:relative;
-    }
-
-    .cta-box h2{
-      font-size:clamp(34px,5vw,58px);
-      line-height:.96;
-      letter-spacing:-.05em;
-      font-weight:800;
-      margin-bottom:10px;
-    }
-
-    .cta-box p{
-      color:var(--text);
-      max-width:720px;
-      line-height:1.8;
-      font-size:16px;
-    }
-
-    .cta-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    footer{
-      padding:26px 0 48px;
-      color:#8d94a3;
-      font-size:14px;
-    }
-
-    .footer-row{
-      padding-top:20px;
-      border-top:1px solid rgba(255,255,255,.08);
-      display:flex;
-      justify-content:space-between;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-
-    @media (max-width: 1050px){
-      .hero-grid,
-      .studio-grid,
-      .artist-card,
-      .artist-card.reverse,
-      .feature-grid,
-      .gallery-grid,
-      .cta-box{
-        grid-template-columns:1fr;
-      }
-
-      .artist-card.reverse .artist-info,
-      .artist-card.reverse .artist-media{
-        order:initial;
-      }
-
-      .section-top{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .hero-mini{
-        grid-template-columns:1fr;
-      }
-
-      .cta-actions{
-        justify-content:flex-start;
-      }
-    }
-
-    @media (max-width: 760px){
-      .nav{
-        min-height:auto;
-        padding:14px 0;
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .hero-left,
-      .hero-right,
-      .glass-card,
-      .artist-card,
-      .feature-card,
+    @media (max-width: 1100px) {
+      .split,
+      .artist-row,
+      .artist-row.reverse,
       .cta-box,
-      .gallery-panel,
-      .center-box{
-        padding:22px;
+      .masonry {
+        grid-template-columns: 1fr;
       }
 
-      .artist-media-grid{
-        grid-template-columns:1fr;
-        grid-template-rows:auto;
+      .artist-row.reverse .artist-text,
+      .artist-row.reverse .artist-gallery {
+        order: initial;
       }
 
-      .artist-media-grid .big{
-        grid-row:auto;
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .artist-name{
-        flex-direction:column;
-        align-items:flex-start;
+      .cta-actions {
+        justify-content: flex-start;
+      }
+
+      .masonry-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        min-height: 92vh;
+        padding: 130px 0 60px;
+      }
+
+      .artist-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .artist-gallery .large {
+        grid-column: auto;
+        min-height: 280px;
+      }
+
+      .image-block,
+      .image-placeholder,
+      .wide-image,
+      .wide-image img {
+        min-height: 380px;
+      }
+
+      .masonry-col {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -742,16 +708,16 @@
 
   <header>
     <div class="container nav">
-      <a href="#" class="brand">
-        <div class="brand-mark">PB</div>
+      <a href="#" class="logo">
+        <div class="logo-mark">PB</div>
         <span>PINK BLUE TATTOO</span>
       </a>
 
       <nav class="nav-links">
         <a href="#studio">Studio</a>
         <a href="#artists">Artists</a>
-        <a href="#styles">Styles</a>
-        <a href="#booking">Kontakt</a>
+        <a href="#styles">Spezialisierungen</a>
+        <a href="#gallery">Galerie</a>
         <a href="#booking" class="btn btn-gradient">Booking</a>
       </nav>
     </div>
@@ -759,204 +725,190 @@
 
   <main>
 
+    <!-- HERO -->
     <section class="hero">
-      <div class="blur-orb orb-pink" style="width:260px;height:260px;left:-80px;top:120px;"></div>
-      <div class="blur-orb orb-blue" style="width:240px;height:240px;right:-60px;top:100px;"></div>
+      <div class="hero-slider">
+        <div class="hero-slide" style="background-image:url('YOUR-HERO-IMAGE-1.jpg');"></div>
+        <div class="hero-slide" style="background-image:url('YOUR-HERO-IMAGE-2.jpg');"></div>
+        <div class="hero-slide" style="background-image:url('YOUR-HERO-IMAGE-3.jpg');"></div>
+      </div>
 
-      <div class="container hero-grid">
-        <div class="hero-left">
-          <div class="eyebrow">Tattoo Studio im Murtal</div>
-          <h1>
-            Dein Tattoo.<br>
-            Deine Story.<br>
-            <span class="grad">Dein Artist.</span>
-          </h1>
-          <p class="hero-sub">
-            Von filigranen Fineline-Arbeiten bis hin zu ausdrucksstarken Black & Grey Tattoos:
-            Bei Pink Blue Tattoo trifft starke Bildsprache auf saubere Ausführung, höchste Hygiene
-            und eine Studioatmosphäre, die modern, ruhig und persönlich wirkt.
-          </p>
+      <div class="hero-overlay"></div>
 
-          <div class="hero-actions">
-            <a href="#booking" class="btn btn-gradient">Jetzt Termin anfragen</a>
-            <a href="#artists" class="btn btn-dark">Artists ansehen</a>
-          </div>
+      <div class="container hero-content">
+        <div class="eyebrow">Tattoo Studio im Murtal</div>
 
-          <div class="hero-mini">
-            <div class="mini-box">
-              <strong>Modernes Studio</strong>
-              <span>Klare Atmosphäre, hochwertige Umgebung und ein Auftritt, der direkt professionell wirkt.</span>
-            </div>
-            <div class="mini-box">
-              <strong>Höchste Hygienestandards</strong>
-              <span>Sauberes Arbeiten, klare Prozesse und volle Konzentration auf Qualität und Sicherheit.</span>
-            </div>
-            <div class="mini-box">
-              <strong>Persönliche Beratung</strong>
-              <span>Keine Fließband-Tattoos, sondern Designs, die wirklich zu dir und deiner Geschichte passen.</span>
-            </div>
-          </div>
+        <h1>
+          Dein Tattoo.<br>
+          Deine Story.<br>
+          <span class="grad">Dein Artist.</span>
+        </h1>
+
+        <p class="hero-sub">
+          Von filigranen Fineline-Arbeiten bis hin zu ausdrucksstarken Black & Grey Tattoos:
+          Bei Pink Blue Tattoo treffen starke Bildsprache, saubere Ausführung, höchste Hygiene
+          und eine moderne Studioatmosphäre aufeinander.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#booking" class="btn btn-gradient">Jetzt Termin anfragen</a>
+          <a href="#artists" class="btn btn-dark">Artists ansehen</a>
         </div>
 
-        <div class="hero-right">
-          <div class="slider">
-            <div class="slider-badge">Hero Slideshow</div>
+        <div class="hero-stats">
+          <span>Modernes Studio</span>
+          <span>Höchste Hygienestandards</span>
+          <span>Persönliche Beratung</span>
+        </div>
+      </div>
+    </section>
 
-            <div class="slide" style="background-image:url('YOUR-HERO-IMAGE-1.jpg');"></div>
-            <div class="slide" style="background-image:url('YOUR-HERO-IMAGE-2.jpg');"></div>
-            <div class="slide" style="background-image:url('YOUR-HERO-IMAGE-3.jpg');"></div>
+    <!-- STUDIO -->
+    <section id="studio">
+      <div class="container">
+        <div class="section-head">
+          <h2>Modernes Studio.<br><span class="grad">Klare Atmosphäre.</span></h2>
+          <p>
+            Die Website soll genau das ausstrahlen, was man vor Ort spürt:
+            eine moderne, hochwertige Umgebung, klare Abläufe und ein Studio,
+            in dem man sich vom ersten Moment an gut aufgehoben fühlt.
+          </p>
+        </div>
 
-            <div class="slider-text">
-              <h3>Starker erster Eindruck</h3>
-              <p>
-                Genau hier laufen später Studio-, Artist- oder Tattoo-Bilder als Diashow durch.
-                Damit wirkt die Website sofort lebendig, modern und deutlich hochwertiger.
-              </p>
-            </div>
+        <div class="split">
+          <div class="image-block">
+            <div class="image-placeholder">Großes Studiofoto einfügen</div>
           </div>
 
-          <div class="logo-box">
-            <div class="logo-placeholder">Logo oder Brand-Grafik einfügen</div>
+          <div class="content-block">
+            <h3>Unser Studio im Murtal</h3>
+            <p>
+              Pink Blue Tattoo befindet sich in der Bundesstr. 8, 8753 Fohnsdorf
+              und ist schnell erreichbar – zentral gelegen, modern aufgebaut und
+              mit einer klaren, ruhigen Studioatmosphäre.
+            </p>
+            <p>
+              Statt einer unruhigen, alt wirkenden Seite zeigt dieser Aufbau das Studio
+              so, wie es wahrgenommen werden soll: professionell, hochwertig und modern.
+            </p>
+
+            <ul class="bullet-list">
+              <li>2 Minuten von der Autobahnabfahrt entfernt</li>
+              <li>Parkplätze direkt vor der Tür</li>
+              <li>Modernes Studio mit hochwertiger Atmosphäre</li>
+              <li>Sauberer, klarer und persönlicher Ablauf</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="studio">
+    <!-- QUALITY -->
+    <section>
       <div class="container">
-        <div class="section-top">
-          <h2><span class="grad">Unser Studio</span></h2>
+        <div class="section-head">
+          <h2>Qualität &<br><span class="grad">Hygiene</span></h2>
           <p>
-            Zentral gelegen, modern aufgebaut und direkt auf eine ruhige, professionelle
-            Tattoo-Erfahrung ausgerichtet.
+            Ein Tattoo ist Vertrauenssache. Genau deshalb soll die Website nicht nur
+            gut aussehen, sondern Sicherheit, Professionalität und ruhige Qualität vermitteln.
           </p>
         </div>
 
-        <div class="studio-grid">
-          <div class="glass-card">
-            <h3><span class="grad">Lage</span></h3>
-            <ul class="list">
-              <li>2 Minuten von der Autobahnabfahrt entfernt</li>
-              <li>Parkplätze direkt vor der Tür</li>
-              <li>Zentral im Murtal</li>
-              <li>Standort: Bundesstr. 8, 8753 Fohnsdorf</li>
+        <div class="split">
+          <div class="content-block">
+            <h3>Sauber. Präzise. Persönlich.</h3>
+            <p>
+              Jedes Tattoo entsteht in einer Umgebung, die auf Konzentration,
+              Hygiene und sauberes Arbeiten ausgelegt ist. Genau diese Haltung
+              muss auch digital sichtbar sein.
+            </p>
+            <ul class="bullet-list">
+              <li>Höchste Hygienestandards</li>
+              <li>Professionelle Vorbereitung und Beratung</li>
+              <li>Moderne Studioatmosphäre</li>
+              <li>Persönlicher Kontakt statt Massenabfertigung</li>
             </ul>
           </div>
 
-          <div class="glass-card">
-            <div class="placeholder studio">Studiofoto / Standortbild einfügen</div>
+          <div class="image-block">
+            <div class="image-placeholder">Bild von Arbeitsplatz / Studio / Detail einfügen</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <div class="section-top">
-          <h2><span class="grad">Qualität</span> & Hygiene</h2>
-          <p>
-            Ein Tattoo ist Vertrauenssache. Deshalb soll die Website genau das transportieren:
-            modernes Studio, sauberes Arbeiten und eine Atmosphäre, in der man sich wohlfühlt.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <h4>Modernes Studio</h4>
-            <p>Ein klarer, hochwertiger Look statt alter Website-Struktur – genau das soll schon digital spürbar sein.</p>
-          </div>
-          <div class="feature-card">
-            <h4>Höchste Hygienestandards</h4>
-            <p>Sauberes Arbeiten, kontrollierte Abläufe und ein Auftritt, der Sicherheit und Professionalität ausstrahlt.</p>
-          </div>
-          <div class="feature-card">
-            <h4>Familiäre Atmosphäre</h4>
-            <p>Persönlich, nahbar und trotzdem hochwertig – modern im Stil, aber angenehm in der Wirkung.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <!-- ARTISTS -->
     <section id="artists">
       <div class="container">
-        <div class="section-top">
-          <h2>Die <span class="grad">Artists</span></h2>
+        <div class="section-head">
+          <h2>Die Artists.<br><span class="grad">Klar positioniert.</span></h2>
           <p>
-            Zwei klare Profile, zwei unterschiedliche Stärken – damit Besucher sofort sehen,
-            welcher Stil und welcher Artist am besten zu ihnen passt.
+            Besucher sollen sofort sehen, wer wofür steht. Deshalb bekommen Tom und Fiona
+            auf der neuen Seite klare Profile mit eigenen Bildflächen und klaren Schwerpunkten.
           </p>
         </div>
 
-        <div class="artists-wrap">
+        <div class="artists">
 
-          <div class="artist-card">
-            <div class="artist-info">
-              <div class="artist-name">
-                <h3>Tom</h3>
-                <span class="pill">Black & Grey · Realism · Cover Ups</span>
-              </div>
+          <!-- TOM -->
+          <div class="artist-row">
+            <div class="artist-gallery">
+              <div class="gallery-box large placeholder">Tom Portrait / Hero-Bild</div>
+              <div class="gallery-box placeholder">Tom bei der Arbeit</div>
+              <div class="gallery-box placeholder">Tattoo von Tom</div>
+            </div>
 
+            <div class="artist-text">
+              <div class="label">Black & Grey · Realism · Cover Ups</div>
+              <h3>Tom</h3>
               <p>
                 Tom ist spezialisiert auf Black & Grey Realistik mit Fokus auf starke Kontraste,
-                weiche Schattierungen und detailreiche Motive.
+                saubere Schattierungen und Motive mit Tiefe, Ausdruck und klarer Wirkung.
               </p>
-
               <p>
                 Ein besonderer Schwerpunkt von Tom ist die professionelle Überarbeitung von
-                bestehenden Tattoos – Cover Ups, Reworks und Motive mit mehr Tiefe, Wirkung und Charakter.
+                bestehenden Tattoos – Cover Ups, Reworks und detailreiche Arbeiten,
+                die sichtbar hochwertig wirken.
               </p>
 
               <div class="tags">
                 <span class="tag">Cover Up</span>
                 <span class="tag">Realism</span>
                 <span class="tag">Black & Grey</span>
-                <span class="tag">Rework</span>
                 <span class="tag">Portrait</span>
+                <span class="tag">Rework</span>
                 <span class="tag">Chicano</span>
-              </div>
-            </div>
-
-            <div class="artist-media">
-              <div class="artist-media-grid">
-                <div class="placeholder artist-small">Tom bei der Arbeit</div>
-                <div class="placeholder artist-main big">Tom Portrait</div>
-                <div class="placeholder artist-small">Tom weiteres Bild</div>
               </div>
             </div>
           </div>
 
-          <div class="artist-card reverse">
-            <div class="artist-info">
-              <div class="artist-name">
-                <h3>Fiona</h3>
-                <span class="pill">Fineline · Floral · Feminine Designs</span>
-              </div>
-
+          <!-- FIONA -->
+          <div class="artist-row reverse">
+            <div class="artist-text">
+              <div class="label">Fineline · Florale Motive · Feminine Designs</div>
+              <h3>Fiona</h3>
               <p>
-                Fiona steht für feine Linien, weiche Schattierungen und elegante Black & Grey Tattoos
-                mit einer femininen, leichten Ausstrahlung.
+                Fiona steht für feine Linien, elegante Kompositionen und moderne Tattoos
+                mit leichter, klarer und detailreicher Ausstrahlung.
               </p>
-
               <p>
-                Ihr Stil verbindet Minimalismus mit Detail – besonders in floralen Motiven,
-                Natur-Elementen, Schriftzügen und zarten Kompositionen mit moderner Ästhetik.
+                Ihr Stil verbindet Minimalismus mit Präzision – besonders in floralen Motiven,
+                Natur-Elementen, Schriftzügen und fein abgestimmten Black & Grey Arbeiten.
               </p>
 
               <div class="tags">
                 <span class="tag">Fineline</span>
                 <span class="tag">Florale Motive</span>
-                <span class="tag">Schriftzüge</span>
                 <span class="tag">Natur & Tiere</span>
+                <span class="tag">Schriftzüge</span>
                 <span class="tag">Feminine Designs</span>
               </div>
             </div>
 
-            <div class="artist-media">
-              <div class="artist-media-grid">
-                <div class="placeholder artist-small">Fiona bei der Arbeit</div>
-                <div class="placeholder artist-main big">Fiona Portrait</div>
-                <div class="placeholder artist-small">Fiona weiteres Bild</div>
-              </div>
+            <div class="artist-gallery">
+              <div class="gallery-box large placeholder">Fiona Portrait / Hero-Bild</div>
+              <div class="gallery-box placeholder">Fiona bei der Arbeit</div>
+              <div class="gallery-box placeholder">Tattoo von Fiona</div>
             </div>
           </div>
 
@@ -964,68 +916,59 @@
       </div>
     </section>
 
+    <!-- SPECIALISATIONS -->
     <section id="styles">
       <div class="container">
-        <div class="section-top">
-          <h2>Unsere <span class="grad">Spezialisierungen</span></h2>
-          <p>
-            Nicht einfach nur Tattoos – sondern Stilrichtungen mit klarer Handschrift und sauberer Positionierung.
-          </p>
-        </div>
+        <div class="wide-image placeholder">Großes, starkes Tattoo- oder Studio-Bild einfügen</div>
 
-        <div class="glass-card center-box">
+        <div class="text-centered" style="margin-top:42px;">
+          <h2>Unsere <span class="grad">Spezialisierungen</span></h2>
           <p>
             Bei Pink Blue Tattoo vereinen wir unterschiedliche Stilrichtungen – von filigranen
             Fineline Arbeiten bis hin zu ausdrucksstarken Black & Grey Tattoos.
           </p>
-
           <p>
-            Unser Fokus liegt auf individuellen Designs, die perfekt zu dir, deinem Körper und
-            deiner Geschichte passen. Ob zarte florale Motive, minimalistische Linienarbeiten oder
-            anspruchsvolle Cover Ups – jedes Tattoo wird mit höchster Präzision, Erfahrung und Liebe
-            zum Detail umgesetzt.
+            Unser Fokus liegt auf individuellen Designs, die perfekt zu dir, deinem Körper
+            und deiner Geschichte passen. Ob zarte florale Motive, minimalistische Linienarbeiten
+            oder anspruchsvolle Cover Ups – jedes Tattoo wird mit höchster Präzision, Erfahrung
+            und Liebe zum Detail umgesetzt.
           </p>
-
           <p>
-            Wir arbeiten ausschließlich nach Terminvereinbarung, um dir eine ruhige, persönliche
-            und professionelle Studioatmosphäre zu bieten.
+            Wir arbeiten ausschließlich nach Terminvereinbarung, um dir eine ruhige,
+            persönliche und professionelle Studioatmosphäre zu bieten.
           </p>
         </div>
       </div>
     </section>
 
-    <section>
+    <!-- GALLERY -->
+    <section id="gallery">
       <div class="container">
-        <div class="section-top">
-          <h2><span class="grad">Content</span> & Galerie</h2>
+        <div class="section-head">
+          <h2>Mehr Bildfläche.<br><span class="grad">Weniger Chaos.</span></h2>
           <p>
-            Hier können später starke Tattoos, Studio-Shots oder Cinematic Reels eingebunden werden,
-            damit die Website noch lebendiger und hochwertiger wirkt.
+            Genau so wirkt die Seite moderner: große Bilder, starke Ausschnitte,
+            klare Typografie und keine überladene Struktur.
           </p>
         </div>
 
-        <div class="gallery-grid">
-          <div class="gallery-panel">
-            <h4>Portfolio Highlights</h4>
-            <p>Ausgewählte Arbeiten mit starker Wirkung statt einer unruhigen, überladenen Galerie.</p>
-            <div class="placeholder gallery">Portfolio-Bild / Reel</div>
+        <div class="masonry">
+          <div class="masonry-item tall placeholder">Großes Portfolio-Bild</div>
+
+          <div class="masonry-col">
+            <div class="masonry-item small placeholder">Studio-Detail</div>
+            <div class="masonry-item tall placeholder">Tattoo-Detail / Reel Thumbnail</div>
           </div>
 
-          <div class="gallery-panel">
-            <h4>Studio Eindruck</h4>
-            <p>Moderne Atmosphäre, Qualität und Branding auf einen Blick.</p>
-            <div class="placeholder gallery">Studio-Bild</div>
-          </div>
-
-          <div class="gallery-panel">
-            <h4>Video Content</h4>
-            <p>Perfekt für deine cinematischen Clips, Reels oder Werbevideos.</p>
-            <div class="placeholder gallery">Video-Vorschaubild</div>
+          <div class="masonry-col">
+            <div class="masonry-item tall placeholder">Artist / Arbeitsszene</div>
+            <div class="masonry-item small placeholder">Close-up / Motiv</div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- CTA -->
     <section id="booking">
       <div class="container">
         <div class="cta-box">
@@ -1050,7 +993,7 @@
   <footer>
     <div class="container footer-row">
       <span>PINK BLUE TATTOO · Onepager Konzept</span>
-      <span>Modernes Website-Mockup</span>
+      <span>Moderner Website-Relaunch</span>
     </div>
   </footer>
 
