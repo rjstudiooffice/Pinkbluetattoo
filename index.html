@@ -124,24 +124,31 @@
   .nav-links a {
     color: rgba(240,242,245,0.5); text-decoration: none;
     font-size: 12px; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 8px 14px; transition: color 0.2s;
+    padding: 8px 14px;
     position: relative;
+    transition: color 0.3s, text-shadow 0.3s, letter-spacing 0.3s;
+    z-index: 1;
   }
 
-  /* Nav link animated underline */
   .nav-links a:not(.nav-cta)::after {
     content: '';
     position: absolute;
-    bottom: 2px; left: 14px; right: 14px;
-    height: 1px;
+    bottom: 0; left: 14px; right: 14px;
+    height: 2px;
     background: linear-gradient(90deg, var(--pink), var(--cyan));
     transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px rgba(255,47,168,0.8), 0 0 16px rgba(39,216,255,0.4);
+  }
+
+  .nav-links a:not(.nav-cta):hover {
+    color: var(--white);
+    letter-spacing: 2.5px;
+    text-shadow: 0 0 10px rgba(255,47,168,1), 0 0 20px rgba(255,47,168,0.6), 0 0 40px rgba(39,216,255,0.4);
   }
 
   .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
-  .nav-links a:not(.nav-cta):hover { color: var(--white); }
 
   .nav-cta {
     background: linear-gradient(90deg, var(--pink), var(--cyan));
@@ -524,7 +531,7 @@
   /* BOOKING */
   .booking {
     padding: 0; background: var(--bg);
-    position: relative; overflow: hidden;
+    position: relative;
   }
 
   .booking-inner {
