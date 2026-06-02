@@ -246,13 +246,24 @@ nav.scrolled {
   padding: 0 52px; max-width: 960px;
   padding-top: 88px;
 }
+/* Hero curtain – fades out after loader exits */
+#hero-curtain {
+  position: absolute; inset: 0; z-index: 6;
+  background: var(--bg);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+body.hero-ready #hero-curtain { opacity: 0; }
+
 .hero-label {
   display: inline-flex; align-items: center; gap: 12px;
   font-size: 10px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase;
   color: rgba(240,242,245,0.4); margin-bottom: 24px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+  opacity: 0;
 }
 .hero-label::before { content: ''; width: 28px; height: 1px; background: linear-gradient(90deg, var(--pink), var(--cyan)); }
+body.hero-ready .hero-label { animation: fadeUp 0.8s ease 0.2s forwards; }
 
 /* Split-text hero title */
 .hero-title {
@@ -266,13 +277,13 @@ nav.scrolled {
   display: inline-block;
   transform: translateY(110%);
   opacity: 0;
-  animation: wordReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.hero-title .word.w1 { animation-delay: 0.9s; }
-.hero-title .word.w2 { animation-delay: 1.0s; }
-.hero-title .word.w3 { animation-delay: 1.1s; }
-.hero-title .word.w4 { animation-delay: 1.2s; }
-.hero-title .word.w5 { animation-delay: 1.3s; }
+body.hero-ready .hero-title .word { animation: wordReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+body.hero-ready .hero-title .word.w1 { animation-delay: 0.1s; }
+body.hero-ready .hero-title .word.w2 { animation-delay: 0.22s; }
+body.hero-ready .hero-title .word.w3 { animation-delay: 0.38s; }
+body.hero-ready .hero-title .word.w4 { animation-delay: 0.52s; }
+body.hero-ready .hero-title .word.w5 { animation-delay: 0.68s; }
 .hero-title .grad { background: linear-gradient(90deg, var(--pink), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 @keyframes wordReveal { to { transform: translateY(0); opacity: 1; } }
@@ -281,22 +292,22 @@ nav.scrolled {
 .hero-sub {
   font-size: 15px; font-weight: 300; color: rgba(240,242,245,0.5);
   line-height: 1.85; max-width: 500px; margin-bottom: 40px;
-  opacity: 0; animation: fadeUp 0.8s ease 1.4s forwards;
+  opacity: 0;
 }
+body.hero-ready .hero-sub { animation: fadeUp 0.8s ease 0.85s forwards; }
 .hero-actions {
   display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px;
-  opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards;
+  opacity: 0;
 }
+body.hero-ready .hero-actions { animation: fadeUp 0.8s ease 1.0s forwards; }
 .hero-facts {
   display: flex; gap: 28px; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp 0.8s ease 1.6s forwards;
+  opacity: 0;
 }
+body.hero-ready .hero-facts { animation: fadeUp 0.8s ease 1.15s forwards; }
 .hero-fact { font-size: 10px; font-weight: 300; letter-spacing: 1.5px; color: rgba(240,242,245,0.3); display: flex; align-items: center; gap: 8px; }
 .hero-fact::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--cyan)); flex-shrink: 0; }
 
-.hero-dots { position: absolute; right: 52px; bottom: 60px; z-index: 5; display: flex; flex-direction: column; gap: 8px; }
-.hero-dot { width: 1px; height: 28px; background: rgba(255,255,255,0.12); cursor: none; transition: all 0.3s; }
-.hero-dot.active { background: linear-gradient(180deg, var(--pink), var(--cyan)); height: 48px; box-shadow: 0 0 8px rgba(255,47,168,0.6); }
 
 /* ─── MARQUEE ─────────────────────────────────────────────────────────── */
 .marquee-strip {
@@ -377,7 +388,7 @@ nav.scrolled {
 .studio { padding: 128px 0; background: var(--bg); }
 .studio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 68px; }
 .studio-img { position: relative; overflow: hidden; min-height: 560px; background: var(--bg3); }
-.studio-img img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.8s ease; }
+.studio-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
 .studio-img:hover img { transform: scale(1.03); }
 .studio-content { background: var(--bg2); padding: 68px 52px; display: flex; flex-direction: column; justify-content: center; }
 .studio-features { display: flex; flex-direction: column; gap: 2px; margin: 40px 0; }
@@ -711,6 +722,7 @@ footer { background: var(--bg); border-top: 1px solid var(--line); padding: 44px
     <div class="hero-slide hs2" style="background-image:url(IMG_0457.png);"></div>
     <div class="hero-slide hs3" style="background-image:url(IMG_0458.png);"></div>
   </div>
+  <div id="hero-curtain"></div>
   <div class="hero-overlay"></div>
   <div class="hero-glow"></div>
 
@@ -734,11 +746,6 @@ footer { background: var(--bg); border-top: 1px solid var(--line); padding: 44px
     </div>
   </div>
 
-  <div class="hero-dots" id="heroDots">
-    <div class="hero-dot active" onclick="goToSlide(0)"></div>
-    <div class="hero-dot" onclick="goToSlide(1)"></div>
-    <div class="hero-dot" onclick="goToSlide(2)"></div>
-  </div>
 </section>
 
 <!-- MARQUEE -->
@@ -1016,11 +1023,13 @@ footer { background: var(--bg); border-top: 1px solid var(--line); padding: 44px
     bar.style.width = prog + '%';
   }, 80);
 
-  // Exit loader after ~1.6s
+  // Exit loader after ~1.6s, then trigger hero animations
   setTimeout(() => {
     loaderTop.classList.add('gone');
     loaderBot.classList.add('gone');
     document.getElementById('loader').style.pointerEvents = 'none';
+    // Curtain fades, hero content animates in
+    document.body.classList.add('hero-ready');
     setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 900);
   }, 1600);
 })();
@@ -1107,14 +1116,11 @@ function closeMobileMenu() {
 // ─── HERO SLIDESHOW + PARALLAX ─────────────────────────────────────────
 let currentSlide = 0;
 const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.hero-dot');
 
 function goToSlide(n) {
   slides[currentSlide].classList.remove('active');
-  dots[currentSlide].classList.remove('active');
   currentSlide = n;
   slides[currentSlide].classList.add('active');
-  dots[currentSlide].classList.add('active');
 }
 setInterval(() => goToSlide((currentSlide + 1) % slides.length), 6000);
 
